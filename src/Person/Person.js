@@ -1,6 +1,6 @@
 import React from 'react';
 
-// 'props' includes the tag attributes and inner content as 'children' attribute
+// 'props' includes the tag attributes and inner content as 'children' property
 const person = (props) => {
     return (
         <div>
