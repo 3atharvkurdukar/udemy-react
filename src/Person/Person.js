@@ -1,5 +1,12 @@
 import React from 'react';
-const person = () => {
-    return <p>I'm a person and I am years {Math.floor(Math.random() * 50)} old.</p>;
+
+// 'props' includes the tag attributes and inner content as 'children' attribute
+const person = (props) => {
+    return (
+        <div>
+            <p>I'm a {props.name} and I am {props.age} years old.</p>
+            <p>{props.children}</p>
+        </div>
+    );
 }
 export default person;

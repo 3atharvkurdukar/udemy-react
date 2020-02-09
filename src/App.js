@@ -8,10 +8,9 @@ function App() {
   return (
     <div className="App">
       <h1>Hello, World!</h1>
-      <Person />
-      <Person />
-      <Person />
-      <Person />
+      <Person name="Atharv" age="20" />
+      <Person name="Ezio" age="26" />
+      <Person name="Altair" age="32">Occupation: Assassin</Person>
     </div>
   );
   // Alternate way: Gets compiled as shown below
