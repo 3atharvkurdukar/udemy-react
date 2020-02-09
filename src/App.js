@@ -9,6 +9,9 @@ function App() {
     <div className="App">
       <h1>Hello, World!</h1>
       <Person />
+      <Person />
+      <Person />
+      <Person />
     </div>
   );
   // Alternate way: Gets compiled as shown below
