@@ -9,14 +9,28 @@ class App extends Component {
     persons: [
       { name: 'Atharv', age: 20 },
       { name: 'Ezio', age: 26 },
-      { name: 'Altair', age: 32 }
+      { name: 'Altaïr', age: 32 }
     ]
   };
+
+  switchNameHandler = () => {
+
+    const newPersons = [
+      { name: 'Atharv Kurdukar', age: 20 },
+      { name: 'Ezio Auditore', age: 26 },
+      { name: 'Altaïr Ibn-La\'Ahad', age: 32 }
+    ];
+    this.setState({
+      persons: newPersons
+    });
+  };
+
   // There must be exactly one root element in 'return'
   render() {
     return (
       <div className="App">
         <h1>Hello, World!</h1>
+        <button onClick={this.switchNameHandler}>Full Name</button>
         <Person name={this.state.persons[0].name} age={this.state.persons[0].age} />
         <Person name={this.state.persons[1].name} age={this.state.persons[1].age} />
         <Person name={this.state.persons[2].name} age={this.state.persons[2].age}>Occupation: Assassin</Person>
