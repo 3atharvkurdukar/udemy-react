@@ -37,10 +37,24 @@ class App extends Component {
 
   // There must be exactly one root element in 'return'
   render() {
+
+    const buttonStyle= {
+      color: 'blue',
+      backgroundColor: 'white',
+      border: '2px solid blue',
+      borderRadius: '6px',
+      boxShadow: 'none',
+      padding: '10px',
+      cursor: 'pointer'
+    };
+    // The complex styles like 'hover' cannot be implemented
+
     return (
       <div className="App">
         <h1>Hello, World!</h1>
-        <button onClick={() => this.switchNameHandler('Atharv Kurdukar')}>Full Name</button>
+        <button 
+          style={buttonStyle}
+          onClick={() => this.switchNameHandler('Atharv Kurdukar')}>Full Name</button>
         <Person 
           name={this.state.persons[0].name} 
           age={this.state.persons[0].age} 
