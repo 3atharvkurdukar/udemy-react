@@ -25,6 +25,16 @@ class App extends Component {
     });
   };
 
+  nameChangedHandler = (event) => {
+    this.setState({
+      persons: [
+        { name: 'Atharv', age: 20 },
+        { name: event.target.value, age: 26 },
+        { name: 'Altaïr', age: 32 }
+      ]
+    });
+  };
+
   // There must be exactly one root element in 'return'
   render() {
     return (
@@ -34,10 +44,11 @@ class App extends Component {
         <Person 
           name={this.state.persons[0].name} 
           age={this.state.persons[0].age} 
-          click={this.switchNameHandler.bind(this, 'Shardul')} />
+          click={this.switchNameHandler.bind(this, 'Shardul Kurdukar')} />
         <Person 
           name={this.state.persons[1].name} 
-          age={this.state.persons[1].age} />
+          age={this.state.persons[1].age} 
+          change={this.nameChangedHandler}/>
         <Person 
           name={this.state.persons[2].name} 
           age={this.state.persons[2].age}> Occupation: Assassin </Person>
