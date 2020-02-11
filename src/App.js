@@ -13,10 +13,10 @@ class App extends Component {
     ]
   };
 
-  switchNameHandler = () => {
+  switchNameHandler = (newName) => {
 
     const newPersons = [
-      { name: 'Atharv Kurdukar', age: 20 },
+      { name: newName, age: 20 },
       { name: 'Ezio Auditore', age: 26 },
       { name: 'Altaïr Ibn-La\'Ahad', age: 32 }
     ];
@@ -30,10 +30,17 @@ class App extends Component {
     return (
       <div className="App">
         <h1>Hello, World!</h1>
-        <button onClick={this.switchNameHandler}>Full Name</button>
-        <Person name={this.state.persons[0].name} age={this.state.persons[0].age} />
-        <Person name={this.state.persons[1].name} age={this.state.persons[1].age} />
-        <Person name={this.state.persons[2].name} age={this.state.persons[2].age}>Occupation: Assassin</Person>
+        <button onClick={() => this.switchNameHandler('Atharv Kurdukar')}>Full Name</button>
+        <Person 
+          name={this.state.persons[0].name} 
+          age={this.state.persons[0].age} 
+          click={this.switchNameHandler.bind(this, 'Shardul')} />
+        <Person 
+          name={this.state.persons[1].name} 
+          age={this.state.persons[1].age} />
+        <Person 
+          name={this.state.persons[2].name} 
+          age={this.state.persons[2].age}> Occupation: Assassin </Person>
       </div>
     );
     // Alternate way: Gets compiled as shown below
