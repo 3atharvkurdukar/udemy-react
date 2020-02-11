@@ -4,25 +4,14 @@ import './App.css';
 import Person from './Person/Person';
 
 class App extends Component {
-  // state only works for classes, not for functions
+
   state = {
     persons: [
       { name: 'Atharv', age: 20 },
       { name: 'Ezio', age: 26 },
       { name: 'Altaïr', age: 32 }
-    ]
-  };
-
-  switchNameHandler = (newName) => {
-
-    const newPersons = [
-      { name: newName, age: 20 },
-      { name: 'Ezio Auditore', age: 26 },
-      { name: 'Altaïr Ibn-La\'Ahad', age: 32 }
-    ];
-    this.setState({
-      persons: newPersons
-    });
+    ],
+    showPersons: false
   };
 
   nameChangedHandler = (event) => {
@@ -33,9 +22,15 @@ class App extends Component {
         { name: 'Altaïr', age: 32 }
       ]
     });
+  }
+
+  togglePersonsHandler = () => {
+    this.setState({
+      showPersons: !this.state.showPersons
+    });
   };
 
-  // There must be exactly one root element in 'return'
+
   render() {
 
     const buttonStyle= {
@@ -44,32 +39,32 @@ class App extends Component {
       border: '2px solid blue',
       borderRadius: '6px',
       boxShadow: 'none',
-      padding: '10px',
+      padding: '10px 20px',
       cursor: 'pointer'
     };
-    // The complex styles like 'hover' cannot be implemented
 
     return (
       <div className="App">
-        <h1>Hello, World!</h1>
+        <br />
         <button 
           style={buttonStyle}
-          onClick={() => this.switchNameHandler('Atharv Kurdukar')}>Full Name</button>
-        <Person 
-          name={this.state.persons[0].name} 
-          age={this.state.persons[0].age} 
-          click={this.switchNameHandler.bind(this, 'Shardul Kurdukar')} />
-        <Person 
-          name={this.state.persons[1].name} 
-          age={this.state.persons[1].age} 
-          change={this.nameChangedHandler}/>
-        <Person 
-          name={this.state.persons[2].name} 
-          age={this.state.persons[2].age}> Occupation: Assassin </Person>
+          onClick={this.togglePersonsHandler}>Show / Hide</button>
+        {this.state.showPersons ? 
+          <div>
+            <Person 
+              name={this.state.persons[0].name} 
+              age={this.state.persons[0].age} />
+            <Person 
+              name={this.state.persons[1].name} 
+              age={this.state.persons[1].age} 
+              change={this.nameChangedHandler} />
+            <Person 
+              name={this.state.persons[2].name} 
+              age={this.state.persons[2].age}> Occupation: Assassin </Person>
+          </div>
+         : null }
       </div>
     );
-    // Alternate way: Gets compiled as shown below
-    // return React.createElement('div', {className: 'App'}, React.createElement('h1', null, 'Hello, World!'));
   }
 }
 
