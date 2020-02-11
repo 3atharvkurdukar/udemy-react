@@ -30,6 +30,14 @@ class App extends Component {
     });
   };
 
+  deletePersonHandler = (personIndex) => {
+    // const newPersons = this.state.persons.slice();
+    const newPersons = [...this.state.persons];
+    newPersons.splice(personIndex, 1);
+    this.setState({
+      persons: newPersons
+    });
+  }
 
   render() {
 
@@ -48,11 +56,14 @@ class App extends Component {
       persons = (
         <div>
           {
-            this.state.persons.map(person => (
+            this.state.persons.map((person, index) => {
+              return (
               <Person
+                click={() => this.deletePersonHandler(index)}
                 name={person.name}
                 age={person.age} />
-            ))
+              );
+            })
           }
         </div>
       );
