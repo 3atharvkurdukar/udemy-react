@@ -45,9 +45,9 @@ class App extends Component {
   render() {
 
     const buttonStyle= {
-      color: 'blue',
+      color: 'green',
       backgroundColor: 'white',
-      border: '2px solid blue',
+      border: '2px solid green',
       borderRadius: '6px',
       boxShadow: 'none',
       padding: '10px 20px',
@@ -56,6 +56,8 @@ class App extends Component {
 
     let persons = null;
     if (this.state.showPersons) {
+      buttonStyle.color = 'red';
+      buttonStyle.border = '2px solid red';
       persons = (
         <div>
           {
