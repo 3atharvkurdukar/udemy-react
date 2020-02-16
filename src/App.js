@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
-import './App.css';
-
+import classes from './App.module.css';
 import Person from './Person/Person';
 
 class App extends Component {
@@ -44,18 +43,10 @@ class App extends Component {
 
   render() {
 
-    const buttonStyle= {
-      color: 'blue',
-      backgroundColor: 'white',
-      border: '2px solid blue',
-      borderRadius: '6px',
-      boxShadow: 'none',
-      padding: '10px 20px',
-      cursor: 'pointer'
-    };
-
+    let btnClass = '';
     let persons = null;
     if (this.state.showPersons) {
+      btnClass = classes.Red;
       persons = (
         <div>
           {
@@ -74,11 +65,21 @@ class App extends Component {
       );
     }
 
+    let assignedClasses = [];
+    if (this.state.persons.length <= 2) {
+      assignedClasses.push('blue');
+    }
+    if (this.state.persons.length <= 1) {
+      assignedClasses.push('bold');
+    }
+
     return (
-      <div className="App">
+      <div className={classes.App}>
         <br />
+        <p className={assignedClasses.join(' ')}>React App</p>
         <button 
-          style={buttonStyle}
+          className={btnClass}
+          changeColor={this.state.showPersons}
           onClick={this.togglePersonsHandler}>Show / Hide</button>
         {persons}
       </div>
