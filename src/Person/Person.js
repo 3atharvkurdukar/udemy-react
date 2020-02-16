@@ -1,4 +1,5 @@
 import React from 'react';
+import Radium from 'radium';
 import './Person.css';
 
 // 'props' includes the tag attributes and inner content as 'children' property
@@ -11,4 +12,4 @@ const person = (props) => {
         </div>
     );
 }
-export default person;
+export default Radium(person);
