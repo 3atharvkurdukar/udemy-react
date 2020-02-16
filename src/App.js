@@ -1,6 +1,21 @@
 import React, { Component } from 'react';
+import styled from 'styled-components';
 import './App.css';
 import Person from './Person/Person';
+
+const StyledButton = styled.button`
+      color: ${props => props.changeColor ? 'red' : 'green'};
+      background-color: white;
+      border: ${props => props.changeColor ? '2px solid red' : '2px solid green'};
+      border-radius: 6px;
+      box-shadow: none;
+      padding: 10px 20px;
+      cursor: pointer;
+      &:hover {
+        background-color: ${props => props.changeColor ? 'red' : '#0da000'};
+        color: ${props => props.changeColor ? 'white' : 'black'};
+      }
+`;
 
 class App extends Component {
 
@@ -43,28 +58,9 @@ class App extends Component {
 
   render() {
 
-    const buttonStyle= {
-      color: 'green',
-      backgroundColor: 'white',
-      border: '2px solid green',
-      borderRadius: '6px',
-      boxShadow: 'none',
-      padding: '10px 20px',
-      cursor: 'pointer',
-      ':hover': {
-        backgroundColor: '#0da000',
-        color: 'black'
-      }
-    };
 
     let persons = null;
     if (this.state.showPersons) {
-      buttonStyle.color = 'red';
-      buttonStyle.border = '2px solid red';
-      buttonStyle[':hover'] = {
-        backgroundColor: 'red',
-        color: 'white'
-      };
       persons = (
         <div>
           {
@@ -95,9 +91,9 @@ class App extends Component {
       <div className="App">
         <br />
         <p className={classes.join(' ')}>React App</p>
-        <button 
-          style={buttonStyle}
-          onClick={this.togglePersonsHandler}>Show / Hide</button>
+        <StyledButton 
+          changeColor={this.state.showPersons}
+          onClick={this.togglePersonsHandler}>Show / Hide</StyledButton>
         {persons}
       </div>
     );
