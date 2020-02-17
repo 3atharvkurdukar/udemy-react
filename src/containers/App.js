@@ -5,14 +5,28 @@ import Cockpit from '../components/Cockpit/Cockpit';
 
 class App extends Component {
 
-  state = {
-    persons: [
-      { id: 'nf9wy3r', name: 'Atharv', age: 20 },
-      { id: 'iwuyt34', name: 'Ezio', age: 26 },
-      { id: 'u3iy4r8', name: 'Altaïr', age: 32 }
-    ],
-    showPersons: false
-  };
+  constructor(props) {
+    super(props);
+    console.log('[App.js] constructor');
+    this.state = {
+      persons: [
+        { id: 'nf9wy3r', name: 'Atharv', age: 20 },
+        { id: 'iwuyt34', name: 'Ezio', age: 26 },
+        { id: 'u3iy4r8', name: 'Altaïr', age: 32 }
+      ],
+      showPersons: false
+    };
+  }
+
+  static getDerivedStateFromProps(props, state) {
+
+    console.log('[App.js] getDerivedStateFromProps', props);
+    return state;
+  }
+
+  componentDidMount() {
+    console.log('[App.js] componentDidMount');
+  }
 
   nameChangedHandler = (event, id) => {
 
@@ -43,6 +57,8 @@ class App extends Component {
   }
 
   render() {
+
+    console.log('[App.js] rendering...');
 
     let persons = null;
     if (this.state.showPersons) {
