@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import classes from './Cockpit.module.css';
 
 const Cockpit = (props) => {
@@ -25,7 +25,6 @@ const Cockpit = (props) => {
             <p>It's working!!</p>
             <button
                 className={btnClass}
-                changeColor={props.showPersons}
                 onClick={props.clicked}>Show / Hide</button>
         </div>
     );
