@@ -51,4 +51,4 @@ const Cockpit = (props) => {
     );
 };
 
-export default React.memo(Cockpit);
+export default React.memo(Cockpit);     // Memorises the inputs so that it only updates when input changes
