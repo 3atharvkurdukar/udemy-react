@@ -3,6 +3,11 @@ import classes from './Cockpit.module.css';
 
 const Cockpit = (props) => {
 
+    useEffect(() => {
+        console.log('[Cockpit.js] useEffect');
+        // Http Request...
+    })
+
     console.log('[Cockpit.js] rendering...');
  
     const assignedClasses = [];
