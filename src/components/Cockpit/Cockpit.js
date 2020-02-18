@@ -9,8 +9,21 @@ const Cockpit = (props) => {
         setTimeout(() => {
             alert('Data saved to the cloud!');
         }, 1000);
-    }, [props.persons]);     // gets executed for every change in persons
-    // }, []);     // gets executed only once
+
+        return () => {
+            console.log('[Cockpit.js] cleanup work in useEffect()');
+        };
+    }, []);     // gets executed only once
+    // }, [props.persons]);     // gets executed for every change in persons
+
+    useEffect(() => {
+        console.log('[Cockpit.js] 2nd useEffect');
+
+        return () => {
+            console.log('[Cockpit.js] cleanup work in 2nd useEffect()');
+        };
+    });     // gets executed evvery time DOM is rendered
+
     console.log('[Cockpit.js] rendering...');
  
     const assignedClasses = [];
