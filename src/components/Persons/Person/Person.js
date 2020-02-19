@@ -5,6 +5,11 @@ import withClass from '../../../hoc/withClass';
 
 class Person extends Component {
 
+  constructor(props) {
+    super(props);
+
+    this.inputElRef = React.createRef();
+  }
 
   render() {
     console.log('[Person.js] rendering...');
@@ -14,9 +19,18 @@ class Person extends Component {
       <React.Fragment>
         <p key="ncwi4t" onClick={this.props.click}>I'm a {this.props.name} and I am {this.props.age} years old.</p>
         <p key="877t4f">{this.props.children}</p>
-        <input key="hg94bn" onChange={this.props.change} value={this.props.name} />
+        <input 
+          key="hg94bn"
+          // ref={ (inputEl) => {this.inputElRef = inputEl} } 
+          ref={this.inputElRef}
+          onChange={this.props.change} 
+          value={this.props.name} />
       </React.Fragment>
     );
+  }
+
+  componentDidMount() {
+    this.inputElRef.current.focus();
   }
 }
 
