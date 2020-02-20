@@ -12,15 +12,15 @@ class Person extends Component {
     this.inputElRef = React.createRef();
   }
 
+  static contextType = AuthContext;
+
   render() {
     console.log('[Person.js] rendering...');
   
     // React.Fragment works exactly like Auxiliary and is built into React
     return (
       <React.Fragment>
-        <AuthContext.Consumer>
-          {(context) => context.authenticated ? <p>Authenticated!</p> : <p>Please Log In</p>}
-        </AuthContext.Consumer>
+        {this.context.authenticated ? <p>Authenticated!</p> : <p>Please Log In</p>}
         <p key="ncwi4t" onClick={this.props.click}>I'm a {this.props.name} and I am {this.props.age} years old.</p>
         <p key="877t4f">{this.props.children}</p>
         <input 
@@ -36,6 +36,7 @@ class Person extends Component {
   componentDidMount() {
     // this.inputElRef.focus();
     this.inputElRef.current.focus();
+    console.log(this.context.authenticated);
   }
 }
 
