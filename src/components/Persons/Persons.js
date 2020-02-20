@@ -43,7 +43,6 @@ class Persons extends PureComponent {   // PureComponent updates only if props a
                 <Person
                     click={() => this.props.clicked(index)}
                     change={(event) => this.props.changed(event, person.id)}
-                    isAuth={this.props.isAuthenticated}
                     name={person.name}
                     age={person.age}
                     key={person.id} />
