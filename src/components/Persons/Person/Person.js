@@ -30,6 +30,7 @@ class Person extends Component {
   }
 
   componentDidMount() {
+    // this.inputElRef.focus();
     this.inputElRef.current.focus();
   }
 }

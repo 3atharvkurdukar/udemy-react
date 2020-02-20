@@ -1,18 +1,22 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useRef } from 'react';
 import classes from './Cockpit.module.css';
 
 const Cockpit = (props) => {
 
-    useEffect(() => {
-        console.log('[Cockpit.js] useEffect');
-        // Http Request...
-        setTimeout(() => {
-            alert('Data saved to the cloud!');
-        }, 1000);
+    const togglePersonRef = useRef(null);
 
-        return () => {
-            console.log('[Cockpit.js] cleanup work in useEffect()');
-        };
+    useEffect(() => {
+        // console.log('[Cockpit.js] useEffect');
+        // // Http Request...
+        // setTimeout(() => {
+        //     alert('Data saved to the cloud!');
+        // }, 1000);
+
+        // return () => {
+        //     console.log('[Cockpit.js] cleanup work in useEffect()');
+        // };
+        togglePersonRef.current.click();
+
     }, []);     // gets executed only once
     // }, [props.persons]);     // gets executed for every change in persons
 
@@ -46,6 +50,7 @@ const Cockpit = (props) => {
             <p>It's working!!</p>
             <button
                 className={btnClass}
+                ref={togglePersonRef}
                 onClick={props.clicked}>Show / Hide</button>
         </div>
     );
