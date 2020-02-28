@@ -1,6 +1,7 @@
 import React from 'react';
 import Aux from '../../../hoc/Auxiliary';
 import Button from '../../UI/Button/Button';
+import propTypes from 'prop-types';
 
 const orderSummary = (props) => {
 
@@ -24,5 +25,12 @@ const orderSummary = (props) => {
         </Aux>
     );
 }
+
+orderSummary.propTypes = {
+    ingredients: propTypes.object,
+    price: propTypes.number,
+    cancelOrder: propTypes.func,
+    confirmOrder: propTypes.func
+};
 
 export default orderSummary;
