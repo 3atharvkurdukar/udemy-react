@@ -2,6 +2,7 @@ import React from 'react';
 import classes from './Modal.module.css';
 import Aux from '../../../hoc/Auxiliary'
 import Backdrop from '../Backdrop/Backdrop';
+import propTypes from 'prop-types';
 
 const modal = (props) => {
     return (
@@ -16,5 +17,10 @@ const modal = (props) => {
         </Aux>
     );
 }
+
+modal.propTypes = {
+    show: propTypes.bool,
+    modalClosed: propTypes.func
+};
 
 export default modal;
