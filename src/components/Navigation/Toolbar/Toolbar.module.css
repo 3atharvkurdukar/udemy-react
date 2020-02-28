@@ -4,7 +4,8 @@
     position: fixed;
     top: 0;
     left: 0;
-    background-color: #703b09;
+    background-color: rgb(255, 163, 97);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
     display: flex;
     justify-content: space-between;
     align-items: center;
