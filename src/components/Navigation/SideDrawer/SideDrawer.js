@@ -4,6 +4,7 @@ import classes from './SideDrawer.module.css';
 import Logo from '../../Logo/Logo';
 import Backdrop from '../../UI/Backdrop/Backdrop';
 import Aux from '../../../hoc/Auxiliary';
+import propTypes from 'prop-types';
 
 const sideDrawer = (props) => {
 
@@ -22,6 +23,11 @@ const sideDrawer = (props) => {
             </div>
         </Aux>
     );
-}
+};
+
+sideDrawer.propTypes = {
+    open: propTypes.bool,
+    closed: propTypes.func
+};
 
 export default sideDrawer;
