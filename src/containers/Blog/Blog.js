@@ -10,7 +10,8 @@ class Blog extends Component {
 
     state = {
         posts: [],
-        selectedPostId: null
+        selectedPostId: null,
+        error: false
     };
 
     componentDidMount() {
@@ -24,6 +25,10 @@ class Blog extends Component {
             });
             this.setState({
                 posts: updatedPosts
+            });
+        }).catch((error) => {
+            this.setState({
+                error: true
             });
         });
     }
@@ -47,7 +52,7 @@ class Blog extends Component {
         return (
             <div>
                 <section className="Posts">
-                    { posts }
+                    { this.state.error ? <p style={{textAlign: 'center'}}>Something went wrong!</p> : posts }
                 </section>
                 <section>
                     <FullPost id={this.state.selectedPostId} />
