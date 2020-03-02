@@ -12,14 +12,15 @@ const INGREDIENT_PRICES = {
     salad: 10,
     cheese: 15,
     meat: 40,
-    bacon: 20
+    bacon: 20,
+    bread: 10
 }
 
 class BurgerBuilder extends Component {
 
     state = {
         ingredients: null,
-        totalPrice: 10,
+        totalPrice: INGREDIENT_PRICES['bread'],
         purchasable: false,
         purchasing: false,
         loading: false,
@@ -35,7 +36,7 @@ class BurgerBuilder extends Component {
                     cheese: response.data.cheese,
                     meat: response.data.meat
                 }
-            });
+            }, () => {this.calculateTotalPrice(this.state.ingredients)});
         }).catch(error => {
             this.setState({
                 error: true
@@ -50,6 +51,13 @@ class BurgerBuilder extends Component {
         this.setState({
             purchasable: sum > 0
         });
+    }
+
+    calculateTotalPrice(ingredients) {
+        const sum = Object.keys(ingredients)
+            .map((igKey) => ingredients[igKey] * INGREDIENT_PRICES[igKey])
+            .reduce((sum, el) => { return sum + el; }, INGREDIENT_PRICES['bread']);
+        this.setState({ totalPrice: sum });
     }
 
     addIngredientHandler = (type) => {
