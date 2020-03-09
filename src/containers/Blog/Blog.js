@@ -16,7 +16,7 @@ class Blog extends Component {
 
     componentDidMount() {
         axios.get('/posts').then((response) => {
-            const posts = response.data.slice(0, 4);
+            const posts = response.data.slice(0, 6);
             const updatedPosts = posts.map(post => {
                 return {
                     ...post,
@@ -50,7 +50,15 @@ class Blog extends Component {
         ));
 
         return (
-            <div>
+            <div className="Blog">
+                <header>
+                    <nav>
+                        <ul>
+                            <li><a href="/">Home</a></li>
+                            <li><a href="/new-post">New Post</a></li>
+                        </ul>
+                    </nav>
+                </header>
                 <section className="Posts">
                     { this.state.error ? <p style={{textAlign: 'center'}}>Something went wrong!</p> : posts }
                 </section>
