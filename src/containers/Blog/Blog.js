@@ -15,7 +15,7 @@ class Blog extends Component {
                     <nav>
                         <ul>
                             <li><Link to="/">Home</Link></li>
-                            <li><Link to="/new-post">New Post</Link></li>
+                            <li><Link to={this.props.match.url + '/new-post'}>New Post</Link></li>
                             {/* <li><Link to={{
                                 pathname: '/new-post',
                                 search: '?type=inspirational',
