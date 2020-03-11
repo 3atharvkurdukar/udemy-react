@@ -1,9 +1,11 @@
 import React, { Component } from 'react'
-import { Link } from 'react-router-dom';
+import { Route } from 'react-router-dom';
+// import { Link } from 'react-router-dom';
 
 import axios from '../../../my-axios';
 import Post from '../../../components/Post/Post';
 import classes from './Posts.module.css';
+import FullPost from '../FullPost/FullPost';
 
 export class Posts extends Component {
     state = {
@@ -46,9 +48,12 @@ export class Posts extends Component {
             // </Link>
         ));
         return (
-            <section className={classes.Posts}>
-                {this.state.error ? <p style={{ textAlign: 'center' }}>Something went wrong!</p> : posts}
-            </section>
+            <div>
+                <section className={classes.Posts}>
+                    {this.state.error ? <p style={{ textAlign: 'center' }}>Something went wrong!</p> : posts}
+                </section>
+                <Route exact path={this.props.match.url + '/:id'} component={FullPost} />
+            </div>
         )
     }
 }
