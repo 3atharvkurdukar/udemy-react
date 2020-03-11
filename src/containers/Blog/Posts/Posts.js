@@ -8,7 +8,6 @@ import classes from './Posts.module.css';
 export class Posts extends Component {
     state = {
         posts: [],
-        selectedPostId: null,
         error: false
     };
 
@@ -33,19 +32,18 @@ export class Posts extends Component {
     }
 
     postSelectedHandler = (post_id) => {
-        this.setState({
-            selectedPostId: post_id
-        });
+        this.props.history.push({ pathname: '/posts/' + post_id });
     }
 
     render() {
         const posts = this.state.posts.map((post) => (
-            <Link to={'/posts/' + post.id} key={post.id}>
-                <Post
-                    title={post.title}
-                    author={post.author}
-                    clicked={() => this.postSelectedHandler(post.id)} />
-            </Link>
+            // <Link to={'/posts/' + post.id} key={post.id}>
+            <Post
+                key={post.id}
+                title={post.title}
+                author={post.author}
+                clicked={() => this.postSelectedHandler(post.id)} />
+            // </Link>
         ));
         return (
             <section className={classes.Posts}>
