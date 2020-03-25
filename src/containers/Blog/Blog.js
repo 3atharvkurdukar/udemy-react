@@ -1,9 +1,10 @@
 import React, { Component } from 'react';
-import { Route, NavLink, Switch, Redirect } from 'react-router-dom';
+import { Route, NavLink, Switch, /* Redirect */ } from 'react-router-dom';
 
 import './Blog.css';
 import Posts from './Posts/Posts';
 import NewPost from './NewPost/NewPost';
+import pageNotFound from '../../components/PageNotFound/PageNotFound';
 
 class Blog extends Component {
 
@@ -39,7 +40,8 @@ class Blog extends Component {
                 <Switch>
                     <Route path="/posts" component={Posts} />
                     {this.state.auth ? <Route exact path="/new-post" component={NewPost} /> : null}
-                    <Redirect from="/" to="/posts" />
+                    <Route component={pageNotFound} />
+                    {/* <Redirect from="/" to="/posts" /> */}
                 </Switch>
             </div>
         );
