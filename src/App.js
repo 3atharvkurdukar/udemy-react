@@ -25,12 +25,6 @@ class App extends Component {
               </h2>
             )} />
           </Switch>
-          <ol style={{textAlign: 'left'}}>
-            <li>Make the courses in "Courses" clickable by adding a link and load the "Course" component in the place of "Courses" (without passing any data for now)</li>
-            <li>Pass the course ID to the "Course" page and output it there</li>
-            <li>Pass the course title to the "Course" page - pass it as a param or score bonus points by passing it as query params (you need to manually parse them though!)</li>
-            <li>Load the "Course" component as a nested component of "Courses"</li>
-          </ol>
         </div>
       </BrowserRouter>
     );
