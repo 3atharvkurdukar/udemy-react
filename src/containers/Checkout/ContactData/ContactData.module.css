@@ -2,19 +2,11 @@
   margin: 20px auto;
   width: 80%;
   text-align: center;
-  box-shadow: 0 2px 3px #ccc;
+  box-shadow: 0 8px 8px #ccc;
   border: 1px solid #eee;
+  border-radius: 16px;
   padding: 10px;
   box-sizing: border-box;
-}
-
-.Input {
-  display: block;
-  font-size: 1.2rem;
-  padding: 8px;
-  margin: 8px auto;
-  border: 1px solid #ccc;
-  border-radius: 4px;
 }
 
 @media (min-width: 600px) {
