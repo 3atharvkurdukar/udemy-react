@@ -22,7 +22,7 @@ class Checkout extends Component {
     }
     this.setState({
       ingredients: ingredients,
-      price: price,
+      totalPrice: price,
     });
   }
 
