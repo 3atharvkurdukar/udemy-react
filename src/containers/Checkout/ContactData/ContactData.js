@@ -16,6 +16,10 @@ class ContactData extends Component {
           placeholder: "Name",
         },
         value: "",
+        validation: {
+          required: true,
+        },
+        valid: false,
       },
       email: {
         elementType: "input",
@@ -24,6 +28,10 @@ class ContactData extends Component {
           placeholder: "E-mail",
         },
         value: "",
+        validation: {
+          required: true,
+        },
+        valid: false,
       },
       street: {
         elementType: "input",
@@ -32,6 +40,10 @@ class ContactData extends Component {
           placeholder: "Street",
         },
         value: "",
+        validation: {
+          required: true,
+        },
+        valid: false,
       },
       zipCode: {
         elementType: "input",
@@ -40,6 +52,12 @@ class ContactData extends Component {
           placeholder: "Zip Code",
         },
         value: "",
+        validation: {
+          required: true,
+          minlength: 5,
+          maxlength: 6,
+        },
+        valid: false,
       },
       country: {
         elementType: "input",
@@ -48,6 +66,10 @@ class ContactData extends Component {
           placeholder: "Country",
         },
         value: "",
+        validation: {
+          required: true,
+        },
+        valid: false,
       },
       deliveryMethod: {
         elementType: "select",
@@ -60,6 +82,10 @@ class ContactData extends Component {
           ],
         },
         value: "",
+        validation: {
+          required: true,
+        },
+        valid: false,
       },
     },
     loading: false,
@@ -71,10 +97,15 @@ class ContactData extends Component {
       loading: true,
     });
 
+    const formData = {};
+    for (let key in this.state.orderForm) {
+      formData[key] = this.state.orderForm[key].value;
+    }
+
     const order = {
       ingredients: this.props.ingredients,
       price: this.props.price,
-      deliveryMethod: "Lightning",
+      orderData: formData,
     };
 
     axios
@@ -93,6 +124,23 @@ class ContactData extends Component {
       });
   };
 
+  checkValidity(value, rules) {
+    let isValid = true;
+
+    if (rules.required) {
+      isValid = value.trim() !== "" && isValid;
+    }
+
+    if (rules.minlength) {
+      isValid = value.trim().length >= rules.minlength && isValid;
+    }
+    if (rules.minlength) {
+      isValid = value.trim().length <= rules.maxlength && isValid;
+    }
+
+    return isValid;
+  }
+
   inputChangedHandler = (event, inputIdentifier) => {
     const updatedOrderForm = {
       ...this.state.orderForm,
@@ -101,6 +149,10 @@ class ContactData extends Component {
       ...this.state.orderForm[inputIdentifier],
     };
     updatedFormElement.value = event.target.value;
+    updatedFormElement.valid = this.checkValidity(
+      event.target.value,
+      updatedFormElement.validation
+    );
     updatedOrderForm[inputIdentifier] = updatedFormElement;
     this.setState({
       orderForm: updatedOrderForm,
@@ -121,7 +173,7 @@ class ContactData extends Component {
         {this.state.loading ? (
           <Spinner />
         ) : (
-          <form>
+          <form onSubmit={this.orderHandler}>
             {formElementsArray.map((formElement) => (
               <Input
                 key={formElement.id}
