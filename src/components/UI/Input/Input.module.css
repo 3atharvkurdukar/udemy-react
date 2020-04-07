@@ -23,3 +23,7 @@
   background-color: #fff;
   box-shadow: 0 1px 4px #ccc;
 }
+.Invalid {
+  border: 1px solid red;
+  background-color: #fff5f5;
+}

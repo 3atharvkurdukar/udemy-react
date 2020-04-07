@@ -20,6 +20,7 @@ class ContactData extends Component {
           required: true,
         },
         valid: false,
+        touched: false,
       },
       email: {
         elementType: "input",
@@ -32,6 +33,7 @@ class ContactData extends Component {
           required: true,
         },
         valid: false,
+        touched: false,
       },
       street: {
         elementType: "input",
@@ -44,6 +46,7 @@ class ContactData extends Component {
           required: true,
         },
         valid: false,
+        touched: false,
       },
       zipCode: {
         elementType: "input",
@@ -58,6 +61,7 @@ class ContactData extends Component {
           maxlength: 6,
         },
         valid: false,
+        touched: false,
       },
       country: {
         elementType: "input",
@@ -70,6 +74,7 @@ class ContactData extends Component {
           required: true,
         },
         valid: false,
+        touched: false,
       },
       deliveryMethod: {
         elementType: "select",
@@ -82,10 +87,6 @@ class ContactData extends Component {
           ],
         },
         value: "",
-        validation: {
-          required: true,
-        },
-        valid: false,
       },
     },
     loading: false,
@@ -153,6 +154,7 @@ class ContactData extends Component {
       event.target.value,
       updatedFormElement.validation
     );
+    updatedFormElement.touched = true;
     updatedOrderForm[inputIdentifier] = updatedFormElement;
     this.setState({
       orderForm: updatedOrderForm,
@@ -183,6 +185,9 @@ class ContactData extends Component {
                 changed={(event) =>
                   this.inputChangedHandler(event, formElement.id)
                 }
+                shouldValidate={formElement.config.validation ? true : false}
+                invalid={!formElement.config.valid}
+                touched={formElement.config.touched}
               />
             ))}
             <Button buttonType="Success" clicked={this.orderHandler}>
