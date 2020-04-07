@@ -8,11 +8,59 @@ import Input from "../../../components/UI/Input/Input";
 
 class ContactData extends Component {
   state = {
-    name: "",
-    email: "",
-    address: {
-      street: "",
-      postalCode: "",
+    orderForm: {
+      name: {
+        elementType: "input",
+        elementConfig: {
+          type: "text",
+          placeholder: "Name",
+        },
+        value: "",
+      },
+      email: {
+        elementType: "input",
+        elementConfig: {
+          type: "email",
+          placeholder: "E-mail",
+        },
+        value: "",
+      },
+      street: {
+        elementType: "input",
+        elementConfig: {
+          type: "text",
+          placeholder: "Street",
+        },
+        value: "",
+      },
+      zipCode: {
+        elementType: "input",
+        elementConfig: {
+          type: "number",
+          placeholder: "Zip Code",
+        },
+        value: "",
+      },
+      country: {
+        elementType: "input",
+        type: "text",
+        elementConfig: {
+          placeholder: "Country",
+        },
+        value: "",
+      },
+      deliveryMethod: {
+        elementType: "select",
+        type: "text",
+        elementConfig: {
+          options: [
+            { value: "Standard", displayName: "Standard" },
+            { value: "Express", displayName: "Express" },
+            { value: "Lightning", displayName: "Lightning" },
+          ],
+        },
+        value: "",
+      },
     },
     loading: false,
   };
@@ -26,10 +74,6 @@ class ContactData extends Component {
     const order = {
       ingredients: this.props.ingredients,
       price: this.props.price,
-      customer: {
-        name: this.state.name,
-        address: this.state.address,
-      },
       deliveryMethod: "Lightning",
     };
 
@@ -50,6 +94,13 @@ class ContactData extends Component {
   };
 
   render() {
+    const formElementsArray = [];
+    for (let key in this.state.orderForm) {
+      formElementsArray.push({
+        id: key,
+        config: this.state.orderForm[key],
+      });
+    }
     return (
       <div className={classes.ContactData}>
         <h3>Enter Your Contact Data</h3>
@@ -57,30 +108,14 @@ class ContactData extends Component {
           <Spinner />
         ) : (
           <form>
-            <Input
-              inputtype="input"
-              type="text"
-              name="name"
-              placeholder="Your Name"
-            />
-            <Input
-              inputtype="input"
-              type="email"
-              name="email"
-              placeholder="Your Email"
-            />
-            <Input
-              inputtype="input"
-              type="text"
-              name="street"
-              placeholder="Street"
-            />
-            <Input
-              inputtype="input"
-              type="number"
-              name="postalCode"
-              placeholder="Postal Code"
-            />
+            {formElementsArray.map((formElement) => (
+              <Input
+                key={formElement.id}
+                elementType={formElement.config.elementType}
+                elementConfig={formElement.config.elementConfig}
+                value={formElement.config.value}
+              />
+            ))}
             <Button buttonType="Success" clicked={this.orderHandler}>
               ORDER
             </Button>
