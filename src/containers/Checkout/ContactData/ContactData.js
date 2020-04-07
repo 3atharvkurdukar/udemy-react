@@ -86,9 +86,11 @@ class ContactData extends Component {
             { value: "Lightning", displayName: "Lightning" },
           ],
         },
-        value: "",
+        value: "fastest",
+        valid: true,
       },
     },
+    formIsValid: false,
     loading: false,
   };
 
@@ -127,6 +129,9 @@ class ContactData extends Component {
 
   checkValidity(value, rules) {
     let isValid = true;
+    if (!rules) {
+      return true;
+    }
 
     if (rules.required) {
       isValid = value.trim() !== "" && isValid;
@@ -156,8 +161,14 @@ class ContactData extends Component {
     );
     updatedFormElement.touched = true;
     updatedOrderForm[inputIdentifier] = updatedFormElement;
+
+    let formIsValid = true;
+    for (let key in updatedOrderForm) {
+      formIsValid = updatedOrderForm[key].valid && formIsValid;
+    }
     this.setState({
       orderForm: updatedOrderForm,
+      formIsValid: formIsValid,
     });
   };
 
@@ -190,7 +201,11 @@ class ContactData extends Component {
                 touched={formElement.config.touched}
               />
             ))}
-            <Button buttonType="Success" clicked={this.orderHandler}>
+            <Button
+              buttonType="Success"
+              clicked={this.orderHandler}
+              disabled={!this.state.formIsValid}
+            >
               ORDER
             </Button>
           </form>
