@@ -4,7 +4,6 @@ import "./index.css";
 import App from "./App";
 import * as serviceWorker from "./serviceWorker";
 import { createStore, combineReducers, applyMiddleware, compose } from "redux";
-import reducer from "./store/reducer";
 import { Provider } from "react-redux";
 import counterReducer from "./store/reducers/counter";
 import resultsReducer from "./store/reducers/results";
