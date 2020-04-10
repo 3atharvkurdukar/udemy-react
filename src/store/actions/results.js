@@ -8,7 +8,8 @@ export const storeResult = (result) => {
 };
 
 export const storeResultAsync = (result) => {
-  return (dispatch) => {
+  return (dispatch, getState) => {
+    console.log(getState());
     setTimeout(() => {
       dispatch(storeResult(result));
     }, 2000);
