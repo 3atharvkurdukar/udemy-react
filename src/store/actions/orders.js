@@ -1,5 +1,5 @@
-import * as actionTypes from "./actionTypes";
 import axios from "../../axios-orders";
+import * as actionTypes from "./actionTypes";
 
 export const purchaseBurgerSuccess = (orderId, orderData) => {
   return {
@@ -11,13 +11,20 @@ export const purchaseBurgerSuccess = (orderId, orderData) => {
 
 export const purchaseBurgerFail = (error) => {
   return {
-    type: actionTypes.PURCHASE_BURGER_ERROR,
+    type: actionTypes.PURCHASE_BURGER_FAILED,
     error,
   };
 };
 
-export const purchaseBurgerStart = (orderData) => {
+export const purchaseBurgerStart = () => {
+  return {
+    type: actionTypes.PURCHASE_BURGER_START,
+  };
+};
+
+export const purchaseBurger = (orderData) => {
   return (dispatch) => {
+    dispatch(purchaseBurgerStart());
     axios
       .post("/orders.json", orderData)
       .then((response) => {
