@@ -13,8 +13,11 @@ import * as actionCreators from "../../store/actions/index";
 class BurgerBuilder extends Component {
   state = {
     purchasing: false,
-    error: false,
   };
+
+  componentDidMount() {
+    this.props.onInitIngredients();
+  }
 
   updatePurchaseState = () => {
     const sum = Object.keys(this.props.ingredients)
@@ -78,7 +81,7 @@ class BurgerBuilder extends Component {
               ordered={this.purchaseHandler}
             />
           </Aux>
-        ) : this.state.error ? (
+        ) : this.props.error ? (
           <h2 style={{ textAlign: "center" }}>
             Ingredients could not be fetched!
           </h2>
@@ -94,6 +97,7 @@ const mapStateToProps = (state) => {
   return {
     ingredients: state.ingredients,
     totalPrice: state.totalPrice,
+    error: state.error,
   };
 };
 
@@ -103,6 +107,7 @@ const mapDispatchToProps = (dispatch) => {
       dispatch(actionCreators.addIngredient(ingredientName)),
     onIngredientRemoved: (ingredientName) =>
       dispatch(actionCreators.removeIngredient(ingredientName)),
+    onInitIngredients: () => dispatch(actionCreators.initIngredients()),
   };
 };
 
