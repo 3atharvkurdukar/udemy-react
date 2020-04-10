@@ -9,13 +9,9 @@ const INGREDIENT_PRICES = {
 };
 
 const initialState = {
-  ingredients: {
-    salad: 0,
-    bacon: 0,
-    cheese: 0,
-    meat: 0,
-  },
+  ingredients: null,
   totalPrice: INGREDIENT_PRICES["bread"],
+  error: false,
 };
 
 const burgerBuilderReducer = (state = initialState, action) => {
