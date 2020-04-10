@@ -38,6 +38,14 @@ const storeResult = (result) => {
   };
 };
 
+const storeResultAsync = (result) => {
+  return (dispatch) => {
+    setTimeout(() => {
+      dispatch(storeResult(result));
+    }, 2000);
+  };
+};
+
 const deleteResult = (resultId) => {
   return {
     type: DELETE_RESULT,
@@ -60,5 +68,6 @@ export const actionCreators = {
   add,
   subtract,
   storeResult,
+  storeResultAsync,
   deleteResult,
 };
