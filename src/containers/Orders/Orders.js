@@ -12,7 +12,7 @@ class Orders extends Component {
   }
 
   render() {
-    return this.props.orders ? (
+    return !this.props.loading ? (
       <div>
         {this.props.orders.map((order) => (
           <Order
@@ -31,6 +31,7 @@ class Orders extends Component {
 const mapStateToProps = (state) => {
   return {
     orders: state.orders.orders,
+    loading: state.orders.loading,
   };
 };
 
