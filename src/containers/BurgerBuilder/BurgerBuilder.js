@@ -7,40 +7,17 @@ import OrderSummary from "../../components/Burger/OrderSummary/OrderSummary";
 import axios from "../../axios-orders";
 import Spinner from "../../components/UI/Spinner/Spinner";
 import withErrorHandler from "../../hoc/withErrorHandler/withErrorHandler";
-import * as actionTypes from "../../store/actions";
 import { connect } from "react-redux";
+import * as actionCreators from "../../store/actions/index";
 
 class BurgerBuilder extends Component {
   state = {
     purchasing: false,
-    loading: false,
-    error: false,
   };
 
-  // componentDidMount() {
-  //   axios
-  //     .get("/ingredients.json")
-  //     .then((response) => {
-  //       this.setState(
-  //         {
-  //           ingredients: {
-  //             salad: response.data.salad,
-  //             bacon: response.data.bacon,
-  //             cheese: response.data.cheese,
-  //             meat: response.data.meat,
-  //           },
-  //         },
-  //         () => {
-  //           this.calculateTotalPrice(this.state.ingredients);
-  //         }
-  //       );
-  //     })
-  //     .catch((error) => {
-  //       this.setState({
-  //         error: true,
-  //       });
-  //     });
-  // }
+  componentDidMount() {
+    this.props.onInitIngredients();
+  }
 
   updatePurchaseState = () => {
     const sum = Object.keys(this.props.ingredients)
@@ -64,6 +41,7 @@ class BurgerBuilder extends Component {
   };
 
   purchaseContinueHandler = () => {
+    this.props.onInitPurchase();
     this.props.history.push("/checkout");
   };
 
@@ -81,7 +59,7 @@ class BurgerBuilder extends Component {
           show={this.state.purchasing}
           modalClosed={this.purchaseCancelHandler}
         >
-          {this.state.loading || !this.props.ingredients ? (
+          {!this.props.ingredients ? (
             <Spinner />
           ) : (
             <OrderSummary
@@ -104,7 +82,7 @@ class BurgerBuilder extends Component {
               ordered={this.purchaseHandler}
             />
           </Aux>
-        ) : this.state.error ? (
+        ) : this.props.error ? (
           <h2 style={{ textAlign: "center" }}>
             Ingredients could not be fetched!
           </h2>
@@ -118,17 +96,20 @@ class BurgerBuilder extends Component {
 
 const mapStateToProps = (state) => {
   return {
-    ingredients: state.ingredients,
-    totalPrice: state.totalPrice,
+    ingredients: state.burgerBuilder.ingredients,
+    totalPrice: state.burgerBuilder.totalPrice,
+    error: state.burgerBuilder.error,
   };
 };
 
 const mapDispatchToProps = (dispatch) => {
   return {
     onIngredientAdded: (ingredientName) =>
-      dispatch({ type: actionTypes.ADD_INGREDIENT, ingredientName }),
+      dispatch(actionCreators.addIngredient(ingredientName)),
     onIngredientRemoved: (ingredientName) =>
-      dispatch({ type: actionTypes.REMOVE_INGREDIENT, ingredientName }),
+      dispatch(actionCreators.removeIngredient(ingredientName)),
+    onInitIngredients: () => dispatch(actionCreators.initIngredients()),
+    onInitPurchase: () => dispatch(actionCreators.purchaseInit()),
   };
 };
 
