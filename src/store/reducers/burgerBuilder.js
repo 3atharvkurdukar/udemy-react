@@ -38,6 +38,11 @@ const burgerBuilderReducer = (state = initialState, action) => {
       return {
         ...state,
         ingredients: action.ingredients,
+        totalPrice: Object.keys(action.ingredients)
+          .map((igKey) => action.ingredients[igKey])
+          .reduce((sum, el) => {
+            return sum + el;
+          }, INGREDIENT_PRICES["bread"]),
         error: false,
       };
     case actionTypes.FETCH_INGREDIENTS_FAILED:
