@@ -107,9 +107,16 @@ class Auth extends Component {
         config: this.state.controls[key],
       });
     }
+    let redirect = null;
+    if (this.props.auth) {
+      if (!this.props.buildingBurger) {
+        this.props.onSetAuthRedirectPath("/");
+      }
+      redirect = <Redirect to={thiis.props.authRedirectPath} />;
+    }
     return (
       <div className={classes.Auth}>
-        {this.props.isAuth ? <Redirect to="/" /> : null}
+        {redirect}
         {this.props.loading ? (
           <Spinner />
         ) : (
@@ -151,6 +158,8 @@ const mapStateToProps = (state) => {
     loading: state.auth.loading,
     error: state.auth.error,
     isAuth: state.auth.token !== null,
+    buildingBurger: state.burgerBuider.building,
+    authRedirectPath: state.auth.authRedirectPath,
   };
 };
 
@@ -158,6 +167,8 @@ const mapDispatchToProps = (dispatch) => {
   return {
     onAuth: (email, password, isSignup) =>
       dispatch(actions.auth(email, password, isSignup)),
+    onSetAuthRedirectPath: (path) =>
+      dispatch(actions.setAuthRedirectPath(path)),
   };
 };
 
