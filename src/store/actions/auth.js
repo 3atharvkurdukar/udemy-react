@@ -36,12 +36,10 @@ export const auth = (email, password, isSignUp) => {
     axios
       .post(url, authData)
       .then((response) => {
-        console.log(response);
         dispatch(authSuccess(response.data));
       })
       .catch((error) => {
-        console.log(error);
-        dispatch(authFailed(error));
+        dispatch(authFailed(error.response.data.error));
       });
   };
 };
