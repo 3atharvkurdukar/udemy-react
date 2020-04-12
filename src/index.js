@@ -10,10 +10,12 @@ import { Provider } from "react-redux";
 import { composeWithDevTools } from "redux-devtools-extension";
 import thunk from "redux-thunk";
 import ordersReducer from "./store/reducers/orders";
+import authReducer from "./store/reducers/auth";
 
 const rootReducer = combineReducers({
   burgerBuilder: burgerBuilderReducer,
   orders: ordersReducer,
+  auth: authReducer,
 });
 
 const store = createStore(
