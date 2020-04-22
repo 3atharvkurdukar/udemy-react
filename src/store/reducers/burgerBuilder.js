@@ -1,5 +1,5 @@
 import * as actionTypes from "../actions/actionTypes";
-import { updateObject } from "../utility";
+import { updateObject } from "../../utility/utility";
 
 const INGREDIENT_PRICES = {
   salad: 10,
@@ -20,19 +20,17 @@ const burgerBuilderReducer = (state = initialState, action) => {
   switch (action.type) {
     case actionTypes.ADD_INGREDIENT:
       return updateObject(state, {
-        ingredients: {
-          ...state.ingredients,
+        ingredients: updateObject(state.ingredients, {
           [action.ingredientName]: state.ingredients[action.ingredientName] + 1,
-        },
+        }),
         totalPrice: state.totalPrice + INGREDIENT_PRICES[action.ingredientName],
         building: true,
       });
     case actionTypes.REMOVE_INGREDIENT:
       return updateObject(state, {
-        ingredients: {
-          ...state.ingredients,
+        ingredients: updateObject(state.ingredients, {
           [action.ingredientName]: state.ingredients[action.ingredientName] - 1,
-        },
+        }),
         totalPrice: state.totalPrice - INGREDIENT_PRICES[action.ingredientName],
         building: true,
       });
