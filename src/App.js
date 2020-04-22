@@ -1,13 +1,15 @@
-import React, { Component } from "react";
+import React, { Component, Suspense } from "react";
 import Layout from "./containers/Layout/Layout";
 import BurgerBuilder from "./containers/BurgerBuilder/BurgerBuilder";
-import Checkout from "./containers/Checkout/Checkout";
 import { Route, Switch, Redirect } from "react-router-dom";
-import Orders from "./containers/Orders/Orders";
 import Auth from "./containers/Auth/Auth";
 import Logout from "./containers/Auth/Logout/Logout";
 import { connect } from "react-redux";
 import * as actions from "./store/actions/index";
+import Spinner from "./components/UI/Spinner/Spinner";
+
+const Checkout = React.lazy(() => import("./containers/Checkout/Checkout"));
+const Orders = React.lazy(() => import("./containers/Orders/Orders"));
 
 class App extends Component {
   componentDidMount() {
@@ -24,8 +26,22 @@ class App extends Component {
     if (this.props.isAuth) {
       routes = (
         <Switch>
-          <Route path="/checkout" component={Checkout} />
-          <Route path="/orders" component={Orders} />
+          <Route
+            path="/checkout"
+            render={() => (
+              <Suspense fallback={<Spinner />}>
+                <Checkout />
+              </Suspense>
+            )}
+          />
+          <Route
+            path="/orders"
+            render={() => (
+              <Suspense fallback={<Spinner />}>
+                <Orders />
+              </Suspense>
+            )}
+          />
           <Route path="/auth" component={Auth} />
           <Route path="/logout" component={Logout} />
           <Route exact path="/" component={BurgerBuilder} />
