@@ -20,7 +20,9 @@ const rootReducer = combineReducers({
 
 const store = createStore(
   rootReducer,
-  composeWithDevTools(applyMiddleware(thunk))
+  process.env.NODE_ENV === "development"
+    ? composeWithDevTools(applyMiddleware(thunk))
+    : null
 );
 
 ReactDOM.render(
