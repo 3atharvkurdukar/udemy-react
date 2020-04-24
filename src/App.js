@@ -28,17 +28,17 @@ class App extends Component {
         <Switch>
           <Route
             path="/checkout"
-            render={() => (
+            render={(props) => (
               <Suspense fallback={<Spinner />}>
-                <Checkout />
+                <Checkout {...props} />
               </Suspense>
             )}
           />
           <Route
             path="/orders"
-            render={() => (
+            render={(props) => (
               <Suspense fallback={<Spinner />}>
-                <Orders />
+                <Orders {...props} />
               </Suspense>
             )}
           />

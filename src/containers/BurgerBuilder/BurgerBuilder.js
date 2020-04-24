@@ -8,7 +8,7 @@ import axios from "../../axios-orders";
 import Spinner from "../../components/UI/Spinner/Spinner";
 import withErrorHandler from "../../hoc/withErrorHandler/withErrorHandler";
 import { connect } from "react-redux";
-import * as actionCreators from "../../store/actions/index";
+import * as actions from "../../store/actions/index";
 
 class BurgerBuilder extends Component {
   state = {
@@ -112,13 +112,13 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch) => {
   return {
     onIngredientAdded: (ingredientName) =>
-      dispatch(actionCreators.addIngredient(ingredientName)),
+      dispatch(actions.addIngredient(ingredientName)),
     onIngredientRemoved: (ingredientName) =>
-      dispatch(actionCreators.removeIngredient(ingredientName)),
-    onInitIngredients: () => dispatch(actionCreators.initIngredients()),
-    onInitPurchase: () => dispatch(actionCreators.purchaseInit()),
+      dispatch(actions.removeIngredient(ingredientName)),
+    onInitIngredients: () => dispatch(actions.initIngredients()),
+    onInitPurchase: () => dispatch(actions.purchaseInit()),
     onSetAuthRedirectPath: (path) =>
-      dispatch(actionCreators.setAuthRedirectPath(path)),
+      dispatch(actions.setAuthRedirectPath(path)),
   };
 };
 

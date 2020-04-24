@@ -22,7 +22,7 @@ const store = createStore(
   rootReducer,
   process.env.NODE_ENV === "development"
     ? composeWithDevTools(applyMiddleware(thunk))
-    : null
+    : applyMiddleware(thunk)
 );
 
 ReactDOM.render(
