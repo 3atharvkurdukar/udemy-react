@@ -1,3 +1,12 @@
+import { useRouter } from 'next/router';
+
 export default function NewsDetails() {
-  return <h1>News Details Page</h1>;
+  const router = useRouter();
+
+  return (
+    <>
+      <h1>News Details Page</h1>
+      <p>#{router.query.newsId}</p>
+    </>
+  );
 }
