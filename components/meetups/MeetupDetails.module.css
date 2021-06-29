@@ -1,0 +1,11 @@
+.detail img {
+  width: 100%;
+}
+.detail h1 {
+  font-size: 2.5rem;
+  margin-bottom: 0.5rem;
+}
+.detail address {
+  color: #555555;
+  margin-bottom: 2rem;
+}
